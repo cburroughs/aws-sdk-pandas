@@ -105,6 +105,7 @@ def _start_query_execution(
         max_num_tries=5,
         **args,
     )
+    _logger.debug("query execution ID: %s", response["QueryExecutionId"])
     return cast(str, response["QueryExecutionId"])
 
 

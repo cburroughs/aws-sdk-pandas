@@ -142,7 +142,9 @@ def _get_last_query_infos(
         _logger.debug("paginating Athena's queries history...")
         query_execution_id_list: List[str] = page["QueryExecutionIds"]
         for query_execution_id in query_execution_id_list:
+            _logger.debug("Checking query %s...", query_execution_id)
             if query_execution_id not in _cache_manager:
+                _logger.debug("Not in cache manager: %s", query_execution_id)
                 uncached_ids.append(query_execution_id)
     if uncached_ids:
         new_execution_data = []

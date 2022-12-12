@@ -478,7 +478,7 @@ def apply_configs(function: Callable[..., Any]) -> Callable[..., Any]:
             if hasattr(config, name) is True:
                 value: _ConfigValueType = config[name]
                 if name not in args:
-                    _logger.debug("Applying default config argument %s with value %s.", name, value)
+                    # _logger.debug("Applying default config argument %s with value %s.", name, value)
                     args[name] = value
                 elif _CONFIG_ARGS[name].enforced is True:
                     _logger.debug("Applying ENFORCED config argument %s with value %s.", name, value)
