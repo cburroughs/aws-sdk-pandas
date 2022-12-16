@@ -134,6 +134,7 @@ def _get_last_query_infos(
     args: Dict[str, Union[str, Dict[str, int]]] = {
         "PaginationConfig": {"MaxItems": max_remote_cache_entries, "PageSize": page_size}
     }
+    _logger.debug("Args for list_query_executions: %s", args)
     if workgroup is not None:
         args["WorkGroup"] = workgroup
     paginator = client_athena.get_paginator("list_query_executions")
@@ -141,6 +142,7 @@ def _get_last_query_infos(
     for page in paginator.paginate(**args):
         _logger.debug("paginating Athena's queries history...")
         query_execution_id_list: List[str] = page["QueryExecutionIds"]
+        _logger.debug("query_execution_id_list %s", query_execution_id_list)
         for query_execution_id in query_execution_id_list:
             _logger.debug("Checking query %s...", query_execution_id)
             if query_execution_id not in _cache_manager:
