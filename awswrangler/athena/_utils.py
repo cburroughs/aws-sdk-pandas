@@ -462,6 +462,8 @@ def start_query_execution(
         sql = sql.replace(f":{key};", str(value))
     session: boto3.Session = _utils.ensure_session(session=boto3_session)
 
+    _logger.debug("max_remote_cache_entries: %s", max_remote_cache_entries)
+    _logger.debug("max_local_cache_entries: %s", max_local_cache_entries)
     max_remote_cache_entries = min(max_remote_cache_entries, max_local_cache_entries)
 
     _cache_manager.max_cache_size = max_local_cache_entries
